@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class PalindromeCheckerApp {
 
     /*
-    UC3
+    UC4: Character Array Based Palindrome Check
     @author Developer
     @version 1.0
     */
@@ -15,14 +15,25 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a word to check if it is a palindrome: ");
         String word = scanner.nextLine();
 
-        // Reverse string using loop and concatenation
-        String reversed = "";
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversed = reversed + word.charAt(i); // string concatenation
+        // Convert string to character array
+        char[] chars = word.toCharArray();
+
+        // Two-pointer approach
+        int start = 0;
+        int end = chars.length - 1;
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
-        // Compare original and reversed using equals()
-        if (word.equals(reversed)) {
+        // Display result
+        if (isPalindrome) {
             System.out.println(word + " is a palindrome.");
         } else {
             System.out.println(word + " is not a palindrome.");
