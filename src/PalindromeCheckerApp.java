@@ -1,15 +1,9 @@
 public class PalindromeCheckerApp {
 
-    /*
-    UC10: Case-Insensitive & Space-Ignored Palindrome Checker
-    @author saisuryapati
-    @version 10.0
-    */
-
     public static void main(String[] args) {
 
         System.out.println("Welcome to Palindrome Checker Management System");
-        System.out.println("Version : 10.0");
+        System.out.println("Version : 11.0");
         System.out.println("System initialized successfully");
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
@@ -17,7 +11,10 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string to check: ");
         String input = scanner.nextLine();
 
-        if (isPalindrome(input)) {
+        // Create object of PalindromeChecker
+        PalindromeChecker checker = new PalindromeChecker();
+
+        if (checker.checkPalindrome(input)) {
             System.out.println("\"" + input + "\" is a Palindrome");
         } else {
             System.out.println("\"" + input + "\" is NOT a Palindrome");
@@ -25,11 +22,14 @@ public class PalindromeCheckerApp {
 
         scanner.close();
     }
+}
 
-    // UC10 Logic
-    public static boolean isPalindrome(String input) {
+// Service class (OOP Encapsulation)
+class PalindromeChecker {
 
-        // Remove spaces and convert to lowercase
+    // Method to check palindrome
+    public boolean checkPalindrome(String input) {
+
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
         int start = 0;
