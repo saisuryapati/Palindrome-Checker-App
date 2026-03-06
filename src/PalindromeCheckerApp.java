@@ -1,15 +1,15 @@
 public class PalindromeCheckerApp {
 
     /*
-    UC9: Recursive Palindrome Checker
+    UC10: Case-Insensitive & Space-Ignored Palindrome Checker
     @author saisuryapati
-    @version 9.0
+    @version 10.0
     */
 
     public static void main(String[] args) {
 
         System.out.println("Welcome to Palindrome Checker Management System");
-        System.out.println("Version : 9.0");
+        System.out.println("Version : 10.0");
         System.out.println("System initialized successfully");
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
@@ -18,33 +18,33 @@ public class PalindromeCheckerApp {
         String input = scanner.nextLine();
 
         if (isPalindrome(input)) {
-            System.out.println(input + " is a Palindrome");
+            System.out.println("\"" + input + "\" is a Palindrome");
         } else {
-            System.out.println(input + " is NOT a Palindrome");
+            System.out.println("\"" + input + "\" is NOT a Palindrome");
         }
 
         scanner.close();
     }
 
-    // UC9 Logic using Recursion
+    // UC10 Logic
     public static boolean isPalindrome(String input) {
 
+        // Remove spaces and convert to lowercase
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
-        return checkRecursive(normalized, 0, normalized.length() - 1);
-    }
+        int start = 0;
+        int end = normalized.length() - 1;
 
-    // Recursive function
-    private static boolean checkRecursive(String str, int start, int end) {
+        while (start < end) {
 
-        if (start >= end) {
-            return true;
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
         }
 
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        return checkRecursive(str, start + 1, end - 1);
+        return true;
     }
 }
