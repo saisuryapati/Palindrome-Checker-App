@@ -1,26 +1,15 @@
 public class PalindromeCheckerApp {
 
     /*
-    UC8: Linked List Based Palindrome Checker
+    UC9: Recursive Palindrome Checker
     @author saisuryapati
-    @version 8.0
+    @version 9.0
     */
-
-    // Node class for singly linked list
-    static class Node {
-        char data;
-        Node next;
-
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
 
     public static void main(String[] args) {
 
         System.out.println("Welcome to Palindrome Checker Management System");
-        System.out.println("Version : 8.0");
+        System.out.println("Version : 9.0");
         System.out.println("System initialized successfully");
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
@@ -37,65 +26,25 @@ public class PalindromeCheckerApp {
         scanner.close();
     }
 
-    // UC8 Logic using Linked List
+    // UC9 Logic using Recursion
     public static boolean isPalindrome(String input) {
 
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
-        Node head = null;
-        Node tail = null;
-
-        // Create linked list
-        for (char ch : normalized.toCharArray()) {
-            Node newNode = new Node(ch);
-
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        // Find middle using slow and fast pointer
-        Node slow = head;
-        Node fast = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        // Compare both halves
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data) {
-                return false;
-            }
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-
-        return true;
+        return checkRecursive(normalized, 0, normalized.length() - 1);
     }
 
-    // Reverse Linked List
-    private static Node reverse(Node head) {
+    // Recursive function
+    private static boolean checkRecursive(String str, int start, int end) {
 
-        Node prev = null;
-        Node current = head;
-
-        while (current != null) {
-            Node nextNode = current.next;
-            current.next = prev;
-            prev = current;
-            current = nextNode;
+        if (start >= end) {
+            return true;
         }
 
-        return prev;
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        return checkRecursive(str, start + 1, end - 1);
     }
 }
